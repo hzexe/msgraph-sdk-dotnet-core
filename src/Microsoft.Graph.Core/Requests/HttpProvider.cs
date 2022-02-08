@@ -73,7 +73,7 @@ namespace Microsoft.Graph
                 this.httpClient = new HttpClient(this.httpMessageHandler, this.disposeHandler);
             } 
 
-            this.httpClient.SetFeatureFlag(FeatureFlag.DefaultHttpProvider);
+            //this.httpClient.SetFeatureFlag(FeatureFlag.DefaultHttpProvider);
         }
 
         /// <summary>

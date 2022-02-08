@@ -16,7 +16,23 @@ namespace Microsoft.Graph
     public class BaseClient : IBaseClient
     {
         private string baseUrl;
-        
+
+
+        static SocketsHttpHandler handler = new System.Net.Http.SocketsHttpHandler
+        {
+            // Create a new System.Net.WebProxy
+            // See WebProxy documentation for scenarios requiring
+            // authentication to the proxy
+            //Proxy = new WebProxy(new Uri(proxyAddress)),
+            UseCookies = false,
+            MaxConnectionsPerServer = 40,
+            UseProxy=false
+
+        };
+
+
+
+
         /// <summary>
         /// Constructs a new <see cref="BaseClient"/>.
         /// </summary>
@@ -30,7 +46,7 @@ namespace Microsoft.Graph
         {
             this.BaseUrl = baseUrl;
             this.AuthenticationProvider = authenticationProvider;
-            this.HttpProvider = httpProvider ?? new HttpProvider(new Serializer());
+            this.HttpProvider = httpProvider ?? new HttpProvider(handler,false,new Serializer());
         }
 
         /// <summary>
